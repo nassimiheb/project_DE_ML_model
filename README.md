@@ -7,3 +7,7 @@ A frequent machine learning challenge is classifying data into one of two catego
 ## Dataset :
 
 ## Algorithm :
+
+# Running
+`docker build -t de-model .`
+`docker run -p 3000:3000 de-model`
