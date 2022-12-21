@@ -1,18 +1,17 @@
- # Using the base image with python 3.10
- FROM python:3.10
- 
- # Set our working directory as app
- WORKDIR /app
+# Using the base image with python 3.10
+FROM python:3.10
 
-  # Copy the utils directory and server.py files
- ADD ./utils ./utils
- ADD . .
+RUN mkdir /app
+# Set our working directory as app
+WORKDIR /app
 
- # Run pip install  
- RUN pip install -r requirements.txt
- 
+# Copy the utils directory and server.py files
+COPY ./requirements.txt .
 
- 
- # Exposing the port 3000 from the container to start the application
- EXPOSE 3000 
- CMD ["gunicorn", "--bind", "0.0.0.0:3000", "server:app"]
+# Run pip install  
+RUN pip install -r requirements.txt
+
+COPY . .
+
+# Exposing the port 3000 from the container to start the application
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "80"]
