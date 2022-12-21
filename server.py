@@ -1,23 +1,21 @@
-from flask import Flask
+from fastapi import FastAPI
 import pandas as pd
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route("/", methods=['GET'])
-def load():
+
+@app.get("/")
+async def load():
     return "Server running on port 3000 !"
 
-@app.route("/preprocess", methods=['POST'])
-def preprocess():
+@app.post("/preprocess")
+async def preprocess():
     pass
 
-@app.route("/fit", methods=['POST'])
-def fit():
+@app.post("/fit")
+async def fit():
     pass
 
-@app.route("/predict", methods=['POST'])
-def predict():
+@app.post("/predict")
+async def predict():
     pass
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
