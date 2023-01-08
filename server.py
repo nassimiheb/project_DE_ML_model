@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 import pandas as pd
 from xgboost import XGBClassifier
+import os
 
-from utils.data_loading import load_dataset
 from utils.training import fit_predict
+from utils.data_loading import load_dataset, get_profiling
 
 app = FastAPI()
 
@@ -14,7 +15,11 @@ async def get_server():
 @app.post("/load")
 async def load_data(path: str):
     df = load_dataset(path)
-    return path
+    profile = get_profiling(df)
+
+    profile.to_file('profile.html')
+
+    return str(os.path.dirname(os.path.realpath(__file__))) + "/profile.html"
     
 @app.post("/preprocess")
 async def preprocess():
