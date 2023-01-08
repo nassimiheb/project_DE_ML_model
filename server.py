@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 import pandas as pd
-from utils.data_loading import load_dataset, get_profiling
+from xgboost import XGBClassifier
 import os
+
+from utils.training import fit_predict
+from utils.data_loading import load_dataset, get_profiling
 
 app = FastAPI()
 
@@ -24,7 +27,16 @@ async def preprocess():
 
 @app.post("/fit")
 async def fit(data_path: str, target_variable: str):
-    pass
+    df = load_dataset(data_path)
+
+    y_category_target = df[target_variable]
+    x_input = df.drop([target_variable], axis=1)
+
+
+    xgbc = XGBClassifier()
+
+    report = fit_predict(x_input, y_category_target, 0.2, 42, xgbc)
+    return report
 
 @app.post("/predict")
 async def predict():
