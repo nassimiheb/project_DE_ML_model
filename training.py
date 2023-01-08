@@ -4,6 +4,8 @@ from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, classifi
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import pandas as pd
+
 def fit(X, y, ts, rs, model,accuracy_list ,f1_list,roc_auc_list):
     #train test split
     (X_train, X_test, y_train, y_test) = get_train_test_split(X, y, ts, rs)
@@ -59,3 +61,11 @@ def fit(X, y, ts, rs, model,accuracy_list ,f1_list,roc_auc_list):
 def get_train_test_split(x_input, y_target, test_size, random_state):
     return train_test_split(x_input, y_target, test_size=test_size, stratify=y_target, random_state=random_state)
     # return train_test_split(X, y, test_size=ts, random_state=rs)
+
+#Load Data
+df_train = pd.read_csv('hotel.csv')
+
+df_train.dtypes
+
+df_train = df_train.drop(['reservation_status_date'], axis=1)
+
