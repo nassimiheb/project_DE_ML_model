@@ -5,6 +5,7 @@ import os
 
 from utils.training import fit_predict
 from utils.data_loading import load_dataset, get_profiling
+from utils.preprocessing import preprocessing
 
 app = FastAPI()
 
@@ -29,9 +30,8 @@ async def preprocess():
 async def fit(data_path: str, target_variable: str):
     df = load_dataset(data_path)
 
-    y_category_target = df[target_variable]
-    x_input = df.drop([target_variable], axis=1)
-
+    
+    (x_input, y_category_target) = preprocessing(df, target_variable, completion_rate=0.4)
 
     xgbc = XGBClassifier()
 

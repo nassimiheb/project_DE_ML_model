@@ -17,10 +17,6 @@ def fit_predict(X, y, ts, rs, model):
 
     result = ""
 
-    #performance of model
-    result += "Classification Report: \n", classification_report(y_test, pred)
-    result += "-" * 100 + "\n"
-    
     #accuracy of model
     acc = accuracy_score(y_test, pred)
 
@@ -29,7 +25,6 @@ def fit_predict(X, y, ts, rs, model):
 
     #f1-score of model
     f1 = f1_score(y_test, pred)
-    f1_list.append(f1)
     result += "F1 Score: " + str(f1)
     result += "-" * 100 + "\n"
 
@@ -38,7 +33,7 @@ def fit_predict(X, y, ts, rs, model):
     auc_value = auc(fpr,tpr)
     rocauc_score = roc_auc_score(y_test, pred)
 
-    result += "ROC-AUC Score: " + rocauc_score
+    result += "ROC-AUC Score: " + str(rocauc_score)
     result += "-" * 100 + "\n"
 
     return result
