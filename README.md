@@ -9,6 +9,6 @@ A frequent machine learning challenge is classifying data into one of two catego
 ## Algorithm :
 
 # Running
-- `docker build -t de-model .`
-- `docker run --name de-container -p 80:80 de-model`
+- `docker build -t lrrighi/projet_de_righi_aouadj_benbouabdallah .`
+- `docker run --name de-container -p 80:80 lrrighi/projet_de_righi_aouadj_benbouabdallah`
 - Go to localhost:80/docs
