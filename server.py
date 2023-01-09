@@ -22,10 +22,6 @@ async def load_data(path: str):
 
     return str(os.path.dirname(os.path.realpath(__file__))) + "/profile.html"
     
-@app.post("/preprocess")
-async def preprocess():
-    pass
-
 @app.post("/fit")
 async def fit(data_path: str, target_variable: str):
     df = load_dataset(data_path)
@@ -37,7 +33,3 @@ async def fit(data_path: str, target_variable: str):
 
     report = fit_predict(x_input, y_category_target, 0.2, 42, xgbc)
     return report
-
-@app.post("/predict")
-async def predict():
-    pass
